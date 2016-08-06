@@ -1,0 +1,200 @@
+{
+    "processes": {
+        "6fcbe40d-87a1-4e7d-96da-163e5aff5108": {
+            "component": "router",
+            "metadata": {
+                "icon": "router",
+                "x": 985,
+                "y": 120,
+                "router_id": "6fcbe40d-87a1-4e7d-96da-163e5aff5108",
+                "label": "356"
+            }
+        },
+        "77ea0f6d-8851-4aeb-8f39-9d5ddc80b4a8": {
+            "component": "vm",
+            "metadata": {
+                "vm_id": "77ea0f6d-8851-4aeb-8f39-9d5ddc80b4a8",
+                "vm_status": "ACTIVE",
+                "icon": "vm",
+                "x": 501,
+                "y": 720,
+                "label": "bbbbb"
+            }
+        },
+        "15c0da3d-9b1c-4428-a829-f8cb944c3a01": {
+            "component": "switch",
+            "metadata": {
+                "icon": "switch",
+                "x": 956,
+                "y": 360,
+                "switch_id": "15c0da3d-9b1c-4428-a829-f8cb944c3a01",
+                "label": "net2222"
+            }
+        },
+        "63b61322-ab00-43af-aa5e-07699cc98e86": {
+            "component": "switch",
+            "metadata": {
+                "icon": "switch",
+                "x": 837,
+                "y": 360,
+                "switch_id": "63b61322-ab00-43af-aa5e-07699cc98e86",
+                "label": "external_net",
+                "router_external": "true"
+            }
+        },
+        "5dbadc94-93e5-4abf-9ef6-d8cec772318c": {
+            "component": "switch",
+            "metadata": {
+                "icon": "switch",
+                "x": 137,
+                "y": 360,
+                "switch_id": "5dbadc94-93e5-4abf-9ef6-d8cec772318c",
+                "label": "HA network tenant 334ac3ca497e48b888f357bf16a309d8"
+            }
+        },
+        "3fcec0da-6a05-4491-a1f0-a268cb093948": {
+            "component": "vm",
+            "metadata": {
+                "vm_id": "3fcec0da-6a05-4491-a1f0-a268cb093948",
+                "vm_status": "ACTIVE",
+                "icon": "vm",
+                "x": 105,
+                "y": 720,
+                "label": "qaz"
+            }
+        },
+        "bec66abe-0a52-4e6b-a7e6-7a5fdfcb1dc6": {
+            "component": "switch",
+            "metadata": {
+                "icon": "switch",
+                "x": 745,
+                "y": 360,
+                "switch_id": "bec66abe-0a52-4e6b-a7e6-7a5fdfcb1dc6",
+                "label": "gaojie"
+            }
+        },
+        "ea335f02-6bcb-4c57-adaf-26e92dc5d8c6": {
+            "component": "vm",
+            "metadata": {
+                "vm_id": "ea335f02-6bcb-4c57-adaf-26e92dc5d8c6",
+                "vm_status": "ACTIVE",
+                "icon": "vm",
+                "x": 543,
+                "y": 720,
+                "label": "telegraf"
+            }
+        },
+        "bc98a525-9c2c-4783-beba-15f3bfb16bea": {
+            "component": "switch",
+            "metadata": {
+                "icon": "switch",
+                "x": 854,
+                "y": 360,
+                "switch_id": "bc98a525-9c2c-4783-beba-15f3bfb16bea",
+                "label": "121"
+            }
+        }
+    },
+    "connections": [
+        {
+            "tgt": {
+                "process": "bec66abe-0a52-4e6b-a7e6-7a5fdfcb1dc6",
+                "port": "in"
+            },
+            "src": {
+                "process": "3fcec0da-6a05-4491-a1f0-a268cb093948",
+                "port": "out"
+            }
+        },
+        {
+            "tgt": {
+                "process": "bec66abe-0a52-4e6b-a7e6-7a5fdfcb1dc6",
+                "port": "in"
+            },
+            "src": {
+                "process": "77ea0f6d-8851-4aeb-8f39-9d5ddc80b4a8",
+                "port": "out"
+            }
+        },
+        {
+            "tgt": {
+                "process": "bec66abe-0a52-4e6b-a7e6-7a5fdfcb1dc6",
+                "port": "in"
+            },
+            "src": {
+                "process": "ea335f02-6bcb-4c57-adaf-26e92dc5d8c6",
+                "port": "out"
+            }
+        },
+        {
+            "tgt": {
+                "process": "6fcbe40d-87a1-4e7d-96da-163e5aff5108",
+                "port": "in"
+            },
+            "src": {
+                "process": "bec66abe-0a52-4e6b-a7e6-7a5fdfcb1dc6",
+                "port": "out"
+            }
+        },
+        {
+            "src": {
+                "process": "6fcbe40d-87a1-4e7d-96da-163e5aff5108",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "63b61322-ab00-43af-aa5e-07699cc98e86",
+                "port": "in"
+            }
+        },
+        {
+            "tgt": {
+                "process": "6fcbe40d-87a1-4e7d-96da-163e5aff5108",
+                "port": "in"
+            },
+            "src": {
+                "process": "5dbadc94-93e5-4abf-9ef6-d8cec772318c",
+                "port": "out"
+            }
+        },
+        {
+            "tgt": {
+                "process": "6fcbe40d-87a1-4e7d-96da-163e5aff5108",
+                "port": "in"
+            },
+            "src": {
+                "process": "5dbadc94-93e5-4abf-9ef6-d8cec772318c",
+                "port": "out"
+            }
+        },
+        {
+            "tgt": {
+                "process": "6fcbe40d-87a1-4e7d-96da-163e5aff5108",
+                "port": "in"
+            },
+            "src": {
+                "process": "5dbadc94-93e5-4abf-9ef6-d8cec772318c",
+                "port": "out"
+            }
+        },
+        {
+            "tgt": {
+                "process": "6fcbe40d-87a1-4e7d-96da-163e5aff5108",
+                "port": "in"
+            },
+            "src": {
+                "process": "5dbadc94-93e5-4abf-9ef6-d8cec772318c",
+                "port": "out"
+            }
+        },
+        {
+            "tgt": {
+                "process": "6fcbe40d-87a1-4e7d-96da-163e5aff5108",
+                "port": "in"
+            },
+            "src": {
+                "process": "bec66abe-0a52-4e6b-a7e6-7a5fdfcb1dc6",
+                "port": "out"
+            }
+        }
+    ]
+}
