@@ -331,12 +331,32 @@
         	    node.metadata.x=ext_switch_x_init;
         	    ext_switch_x_init=ext_switch_x_init+100;
         	}
+          var make_icon=function(onenode){
+            if(!onenode.metadata.type){
+            	return "switch";
+            }
+          	if(onenode.metadata.type=="switch"){
+          	    console.log("onenode.metadata:"+onenode.metadata);
+          		if(onenode.metadata.router_external=="true"&&onenode.metadata.shared=="true"){
+          			return "switch_ext_shared";
+          		}else if(onenode.metadata.router_external=="true"){
+          			return "switch_ext";
+          		}else if(onenode.metadata.shared=="true"){
+          			return "switch_shared";
+          		}else{
+          			return "switch";
+          		}
+          	}else{
+          		return onenode.metadata.type
+          	}
+          };
           var component = {
             name: node.component,
             //icon: 'cog',//modify by hao
            // icon: node.metadata.icon, //modify by hao
             //icon:node.component,
-            icon: node.metadata.type,
+            //icon: node.metadata.type,
+            icon:make_icon(node),
             description: '',
             inports: [],
             outports: []

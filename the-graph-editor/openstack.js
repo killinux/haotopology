@@ -138,21 +138,22 @@ loadGraph(
             }
         },
         "e6015d34-51fa-48c3-affc-f838788e89d5":{
-            "component":"switch_e6015d34-51fa-48c3-affc-f838788e89d5",
+            "component":"switch_ext",
             "metadata":{
             	"type":"switch",
                 "x":360,
                 "y":704,
-                "width":172,
+                "width":72,
                 "switch_id":"e6015d34-51fa-48c3-affc-f838788e89d5",
                 "router_external":"true",
                 "label":"Ext-Net"
             }
         },
         "0c1fedeb-a8e4-4ba6-b95d-cf4616108472":{
-            "component":"switch2",
+            "component":"switch_shared",
             "metadata":{
             	"type":"switch",
+            	 "shared":"true",
                 "x":360,
                 "y":206,
                 "switch_id":"0c1fedeb-a8e4-4ba6-b95d-cf4616108472",
@@ -160,7 +161,7 @@ loadGraph(
             }
         },
         "535073f1-19cf-4f69-ad01-0ea59b74770e":{
-            "component":"535073f1-19cf-4f69-ad01-0ea59b74770e",
+            "component":"router",
             "metadata":{
             	"type":"router",
                 "x":720,
@@ -170,9 +171,11 @@ loadGraph(
             }
         },
         "ff1220e1-5631-4cd0-9e5e-70d46cff5a7b":{
-            "component":"switch3",
+            "component":"switch_ext_shared",
             "metadata":{
             	"type":"switch",
+                "shared":"true",
+                "router_external":"true",
                 "x":360,
                 "y":677,
                 "switch_id":"ff1220e1-5631-4cd0-9e5e-70d46cff5a7b",

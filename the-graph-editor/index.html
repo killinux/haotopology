@@ -169,10 +169,10 @@
             var id = Math.random().toString(36).substr(2)
             editor.nofloGraph.nodes.push({
               id: id,
-              component: 'router',
+              component: 'switch_ext_shared',
               metadata: {
-                vm_id: id,
-                vm_status: 'SHUTOFF',
+                type:"switch",
+                router_external:"true",
                 label: id,
                 x: 300,
                 y: 100

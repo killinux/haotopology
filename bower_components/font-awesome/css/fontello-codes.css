@@ -99,8 +99,11 @@
 .icon-aw-radio:before { content: '\e861'; } /* '' */
 .icon-aw-cpu:before { content: '\e862'; } /* '' */
 .icon-aw-ram:before { content: '\e863'; } /* '' */
+.icon-aw-ext-shared:before { content: '\e864'; } /* '' */
 .icon-aw-router:before { content: '\e865'; } /* '' */
 .icon-aw-switch:before { content: '\e866'; } /* '' */
 .icon-aw-vm:before { content: '\e867'; } /* '' */
 .icon-aw-pm:before { content: '\e868'; } /* '' */
 .icon-aw-firewall1:before { content: '\e869'; } /* '' */
+.icon-aw-ext-net:before { content: '\e86a'; } /* '' */
+.icon-aw-shared-net:before { content: '\e86b'; } /* '' */

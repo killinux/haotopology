@@ -683,9 +683,7 @@ context.TheGraph.FONT_AWESOME = {
   "router":"",
    "vm":"",
    "switch":"",
-   "switch_ext":"",
-   "switch_ext_shared":"",
-   "switch_shared":"",
+   "switch_ext":"",
    "pm":"",
    "firewall":""
 };
