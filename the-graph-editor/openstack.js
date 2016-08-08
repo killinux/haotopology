@@ -140,6 +140,7 @@ loadGraph(
         "e6015d34-51fa-48c3-affc-f838788e89d5":{
             "component":"switch_ext",
             "metadata":{
+            	"hidden":"true",
             	"type":"switch",
                 "x":360,
                 "y":704,
@@ -184,6 +185,20 @@ loadGraph(
         }
     },
     "connections":[
+    	{
+            "tgt":{
+                "process":"0c1fedeb-a8e4-4ba6-b95d-cf4616108472",
+                "port":"in1"
+            },
+            "src":{
+                "process":"2cde2568-f891-4f5b-8582-9b42744e3da0",
+                "port":"out"
+            },
+	        "metadata":{
+	        	"route": "1"
+	        }
+           
+        },
         {
             "tgt":{
                 "process":"0c1fedeb-a8e4-4ba6-b95d-cf4616108472",
@@ -242,7 +257,10 @@ loadGraph(
             "src":{
                 "process":"2cde2568-f891-4f5b-8582-9b42744e3da0",//vm
                 "port":"out"
-            }
+            },
+	        "metadata":{
+	        	"route": "1"
+	        }
         },
         {
             "src":{

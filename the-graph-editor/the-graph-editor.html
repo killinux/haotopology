@@ -309,6 +309,11 @@
         var ext_switch_x_init=100;
         nofloGraph.nodes.forEach(function (node) {//haoning:生成component的地方
         /*add by hao :make node order */
+            if(node.metadata.hidden=="true"){
+                console.log("hhhhhhhhhhhhiden");
+               // nofloGraph.removeNode(node.id);
+            //	return;
+            }
         	if(node.metadata.type=="vm"){
             	    node.metadata.y=50;
             	    node.metadata.x=vm_x_init;
@@ -324,9 +329,9 @@
         	    node.metadata.x=router_x_init;
         	    router_x_init=router_x_init+100;
         	}
-        	console.log("router_external--->");
+        //	console.log("router_external--->");
         	if(node.metadata.router_external=="true"){
-        	console.log("router_external--->>>>");
+        //	console.log("router_external--->>>>");
         	    node.metadata.y=650;
         	    node.metadata.x=ext_switch_x_init;
         	    ext_switch_x_init=ext_switch_x_init+100;
@@ -336,7 +341,7 @@
             	return "switch";
             }
           	if(onenode.metadata.type=="switch"){
-          	    console.log("onenode.metadata:"+onenode.metadata);
+          	    //console.log("onenode.metadata:"+onenode.metadata);
           		if(onenode.metadata.router_external=="true"&&onenode.metadata.shared=="true"){
           			return "switch_ext_shared";
           		}else if(onenode.metadata.router_external=="true"){
