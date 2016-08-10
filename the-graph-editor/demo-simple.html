@@ -12,7 +12,7 @@
     <script src="../bower_components/hammerjs/hammer.min.js"></script>
     <script src="../bower_components/ease-djdeath/index.js"></script>
     <script src="../bower_components/react.animate-djdeath/react.animate.js"></script>
-
+    <script src="jquery.js"></script><!-- add by haoning-->
     <!-- Browserify Libraries -->
     <script src="../build/noflo.js"></script>
 
@@ -22,16 +22,16 @@
     <link rel="import" href="../the-graph-nav/the-graph-nav.html">
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/fontello.css">
+    <!--link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400' rel='stylesheet' type='text/css'-->
     <style>
       @font-face {
         /* we want the svg version */
         font-family: 'FontAwesomeSVG';
-        src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg'),
-          url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'),
-          url('../bower_components/font-awesome/fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'),
-          url('../bower_components/font-awesome/fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype');
+        src: url('../bower_components/font-awesome/font/fontello.svg') format('svg'),
+          url('../bower_components/font-awesome/font/fontello.eot') format('embedded-opentype'), 
+          url('../bower_components/font-awesome/font/fontello.woff') format('woff'), 
+          url('../bower_components/font-awesome/font/fontello.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
       }
@@ -81,7 +81,11 @@
 
     <div id="testing">
       <button id="autolayout">autolayout</button>
-      <button id="addnode">add node</button>
+      <button id="addnode">addnode</button>
+      <button id="create_vm">新增虚拟机</button>
+      <button id="create_switch">新增交换机</button>
+      <button id="create_router">新增路由器</button>
+      
       <button id="addedge">add edge</button>
       <button id="random">random graph</button>
       <button id="get">get graph</button>
@@ -97,60 +101,132 @@
         "use strict";
 
         // Remove loading message
-        document.body.removeChild( document.getElementById("loading") );
-
+        //document.body.removeChild( document.getElementById("loading") );
+		 window.loadGraph = function (json) {
+          var loading = document.getElementById("loading");
+          loading.parentNode.removeChild(loading);
+          var editor = document.getElementById('editor');
+          var graph = json.data ? JSON.parse(json.data.files['noflo.json'].content) : json;
+          var graphString = JSON.stringify(graph);
+          editor.graph = graph;
         // The graph editor
-        var editor = document.getElementById('editor');
+       // var editor = document.getElementById('editor');
 
         // Component library
         var library = {
-          basic: {
-            name: 'basic',
-            description: 'basic demo component',
-            icon: 'eye',
+          vm: {
+            name: 'vm',
+            description: 'virtual mechine',
+            icon: 'vm',
             inports: [
-              {'name': 'in0', 'type': 'all'},
-              {'name': 'in1', 'type': 'all'},
-              {'name': 'in2', 'type': 'all'}
+              
             ],
             outports: [
               {'name': 'out', 'type': 'all'}
             ]
           },
-          tall: {
-            name: 'tall',
-            description: 'tall demo component',
-            icon: 'cog',
+          node_switch: {
+            name: 'switch',
+            description: 'this is a switch',
+            icon: 'switch',
             inports: [
-              {'name': 'in0', 'type': 'all'},
-              {'name': 'in1', 'type': 'all'},
-              {'name': 'in2', 'type': 'all'},
-              {'name': 'in3', 'type': 'all'},
-              {'name': 'in4', 'type': 'all'},
-              {'name': 'in5', 'type': 'all'},
-              {'name': 'in6', 'type': 'all'},
-              {'name': 'in7', 'type': 'all'},
-              {'name': 'in8', 'type': 'all'},
-              {'name': 'in9', 'type': 'all'},
-              {'name': 'in10', 'type': 'all'},
-              {'name': 'in11', 'type': 'all'},
-              {'name': 'in12', 'type': 'all'}
+              {'name': 'in0', 'type': 'all'}
             ],
             outports: [
               {'name': 'out0', 'type': 'all'}
             ]
+          },
+          router: {
+            name: 'router',
+            description: 'this is a router',
+            icon: 'router',
+            inports: [
+              {'name': 'in', 'type': 'all'}
+            ],
+            outports: [
+              {'name': 'out', 'type': 'all'}
+            ]
           }
         };
         editor.$.graph.library = library;
+		var x_distance=300;
+		var y_distance=50;
+		var distance=35;
+		//新增vm
+		var create_vm = function () {
+			x_distance=x_distance+distance;
+			y_distance=y_distance+distance;
+			var id = Math.random().toString(36).substr(2)
+			var component ="vm";
+			var metadata = {
+			label: component,
+			x: x_distance,
+			y: y_distance
+			};
+			var newNode = editor.nofloGraph.addNode(id, component, metadata);
+			return newNode;
+        };
+        document.getElementById("create_vm").addEventListener("click", create_vm);
+        //新增switch
+        var create_switch = function () {
+			x_distance=x_distance+distance;
+			y_distance=y_distance+distance;
+			var id = Math.random().toString(36).substr(2)
+			var component ="node_switch";
+			var metadata = {
+				type:"switch",
+				router_external:"false",
+	            shared:"true",
+				label: component,
+				x: x_distance,
+				y: y_distance
+			};
+			var newNode = editor.nofloGraph.addNode(id, component, metadata);
+			console.log(newNode);
+			var make_icon=function(onenode){//更新图标
+            	if(onenode.metadata.type=="switch"){
+		      		if(onenode.metadata.router_external=="true"&&onenode.metadata.shared=="true"){
+		      			return "switch_ext_shared";
+		      		}else if(onenode.metadata.router_external=="true"){
+		      			return "switch_ext";
+		      		}else if(onenode.metadata.shared=="true"){
+		      			return "switch_shared";
+		      		}else{
+		      			return "switch";
+		      		}
+	          	}else{
+	          		return onenode.metadata.type
+	          	}
+            }
+            var this_icon=make_icon(newNode);
 
-        // Load empty graph
-        var graph = {};
-        editor.graph = graph;
-
-        // Add node button
+            editor.updateIcon(id, this_icon);//修改图标
+			
+			return newNode;
+        };
+        document.getElementById("create_switch").addEventListener("click", create_switch);
+        
+         //新增router
+        var create_router = function () {
+			x_distance=x_distance+distance;
+			y_distance=y_distance+distance;
+			var id = Math.random().toString(36).substr(2)
+			var component ="router";
+			var metadata = {
+				type:"router",
+				label: component,
+				x: x_distance,
+				y: y_distance
+			};
+			var newNode = editor.nofloGraph.addNode(id, component, metadata);
+			return newNode;
+        };
+        document.getElementById("create_router").addEventListener("click", create_router);
+		
+		// Add node button
         var addnode = function () {
           var id = Math.round(Math.random()*100000).toString(36);
-          var component = Math.random() > 0.5 ? 'basic' : 'tall';
+          var component = Math.random() > 0.5 ? 'vm' : 'node_switch';
           var metadata = {
             label: component,
             x: Math.round(Math.random()*800),
@@ -180,6 +256,26 @@
         document.getElementById("autolayout").addEventListener("click", function () {
           editor.triggerAutolayout();
         });
+        
+        //告警
+        var errorNodeId=null;
+        var makeRandomError = function () {
+            if (!editor.nofloGraph) { return; }
+            if (errorNodeId) {
+              editor.removeErrorNode(errorNodeId);
+            }
+            var nodes = editor.nofloGraph.nodes;
+            nodes.forEach(function (node) {//add by hao
+            	if(node.metadata.vm_status=="ERROR"){
+            		errorNodeId = node.id;
+	                editor.addErrorNode(errorNodeId);
+	                editor.updateErrorNodes();
+            	}
+            });
+           
+          };
+          window.setInterval(makeRandomError, 3551);
+          makeRandomError();
 
         // Random graph button
         document.getElementById("random").addEventListener("click", function () {
@@ -191,7 +287,7 @@
           setTimeout(function(){
             // b/c ports change
             editor.libraryRefresh();
-            editor.triggerAutolayout();
+            //editor.triggerAutolayout();
           }, 500);
         });
 
@@ -214,10 +310,37 @@
           editor.setAttribute("height", window.innerHeight);
         };
         window.addEventListener("resize", resize);
-
+		window.editor = editor;
         resize();
-      });
+       }
+       
+/*###########数据获取第二种方法############################### begin*/
+			$.ajax({  
+			type: 'GET',  
+		//	url: "http://192.168.137.37:8081/awstack-resource/v1/topo", 
+			url: "ding.json", 
+			beforeSend: function(request) {
+                        request.setRequestHeader("X-Auth-Token", "fe9b1b3575274c3185dab9779267c3c7");
+            },
+		/*	success: function(data){  
+				//console.log(JSON.parse(data).data);
+				var loadjson=JSON.parse(data).data.data;
+				console.log(JSON.stringify(loadjson));
+				loadGraph(loadjson);
+			},  */
+	    	success: function(loadjson){ 
+	    	    console.log("aaaaaaaaaaaaaa"); 
+				loadGraph(loadjson);
+			},
+			error:function(e){  
+				alert("error:"+e);  
+			},  
+			dataType: "string"  
+		});  
+/*###########数据获取第二种方法############################### end*/		
 
+      });
+		
     </script>
   </body>
 </html>

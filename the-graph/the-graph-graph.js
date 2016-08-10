@@ -454,7 +454,7 @@
             node.metadata.height = TheGraph.config.nodeHeight + (diff * TheGraph.config.nodeHeightIncrement);
           }
         }
-        if (!node.metadata.label || node.metadata.label === "") {
+        if (!node.metadata.label || node.metadata.label === "") {//hao review
           node.metadata.label = key;
         }
         var icon = "cog";

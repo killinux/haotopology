@@ -27,7 +27,8 @@
     createEdgeForegroundPath: TheGraph.factories.createPath,
     createEdgeTouchPath: TheGraph.factories.createPath,
     createEdgePathArray: createEdgePathArray,
-    createArrow: TheGraph.factories.createPolygon
+    //createArrow: TheGraph.factories.createPolygon
+	createArrow: function(){}
   };
 
   function createEdgePathArray(sourceX, sourceY, c1X, c1Y, c2X, c2Y, targetX, targetY) {

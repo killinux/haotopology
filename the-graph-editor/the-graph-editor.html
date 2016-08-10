@@ -109,7 +109,7 @@
             actions: nodeActions,
             s4: {
               icon: "trash-o",
-              iconLabel: "delete",
+              iconLabel: "hidden",
               action: nodeActions.delete
             },
             w4: {
@@ -309,34 +309,29 @@
         var ext_switch_x_init=100;
         nofloGraph.nodes.forEach(function (node) {//haoning:生成component的地方
         /*add by hao :make node order */
-            if(node.metadata.hidden=="true"){
-                console.log("hhhhhhhhhhhhiden");
-               // nofloGraph.removeNode(node.id);
-            //	return;
-            }
         	if(node.metadata.type=="vm"){
-            	    node.metadata.y=50;
+            	    node.metadata.y=100;
             	    node.metadata.x=vm_x_init;
             	    vm_x_init=vm_x_init+100;
         	}
         	if(node.metadata.type=="switch"&&!node.metadata.router_external){//非外部网络的，外部网络放到下面
-        	    node.metadata.y=250;
+        	    node.metadata.y=300;
         	    node.metadata.x=switch_x_init;
         	    switch_x_init=switch_x_init+100;
         	}
         	if(node.metadata.type=="router"){
-        	    node.metadata.y=450;
+        	    node.metadata.y=500;
         	    node.metadata.x=router_x_init;
         	    router_x_init=router_x_init+100;
         	}
         //	console.log("router_external--->");
         	if(node.metadata.router_external=="true"){
         //	console.log("router_external--->>>>");
-        	    node.metadata.y=650;
+        	    node.metadata.y=700;
         	    node.metadata.x=ext_switch_x_init;
         	    ext_switch_x_init=ext_switch_x_init+100;
         	}
-          var make_icon=function(onenode){
+            var make_icon=function(onenode){
             if(!onenode.metadata.type){
             	return "switch";
             }
@@ -434,6 +429,8 @@
               });
             }
           });
+          //console.log("component:::");
+          //console.log(component);
           this.registerComponent(component, true);
         }.bind(this));
       },
@@ -447,6 +444,7 @@
         this.$.graph.updateIcon(nodeId, icon);
       },
       rerender: function () {
+        console.log("the-graph-editor.html--->rerender--->>>>");
         this.$.graph.rerender();
       },
       triggerAutolayout: function () {

@@ -1,0 +1,46 @@
+<script type="text/javascript">
+var test_frame=function(){
+	alert("aaa");
+}
+var node_label_change=function (this_event){
+	console.log(this_event.value);
+	var element_id=document.getElementById("element_id").value;
+	console.log("element_id:"+element_id);
+	console.log(window.parent.topomain.editor.nofloGraph.nodes);
+//	var main_nodes=window.parent.topomain.editor.nofloGraph.nodes;
+	window.parent.topomain.editor.nofloGraph.nodes.forEach(function (node,index) {//add by hao
+    	if(node.id==element_id){
+    		console.log(node);
+    		console.log("hahahaha"+">>>>"+index);
+    		window.parent.topomain.editor.nofloGraph.nodes[index].metadata.label=this_event.value;
+    		window.parent.topomain.editor.rerender();
+    	    /*var update_node=window.parent.topomain.editor.nofloGraph.nodes[index];
+    	    //update_node.metadata.node_label=this_event.value;
+    	//	window.parent.topomain.editor.nofloGraph.nodes[index].metadata.node_label=this_event.value;
+    		window.parent.topomain.editor.nofloGraph.nodes.splice(index,1);
+    		window.parent.topomain.editor.nofloGraph.nodes.push(update_node);
+    		
+    		
+    	//		editor.nofloGraph.nodes.splice(0,1);//(delete_node);
+			//	editor.nofloGraph.nodes[0].metadata.node_label="hahahah";
+//    			window.parent.topomain.
+		//		editor.rerender();
+		*/
+    	}
+    });
+}
+</script>
+<div id="vm_div" style="display:block">
+<form action="a.jsp" >
+<div id="show_operation"></div>
+类型:<input type="text" name="node_type" id="node_type" value="" readonly/><br>
+<input type="hidden" name="element_id" id="element_id" value="" readonly/><br>
+id(只读):<input type="text" name="node_id" id="node_id" value="" readonly/><br>
+是否是共享交换机:<input type="text" name="switch_shared" id="switch_shared" value=""/><br>
+是否是外部交换机:<input type="text" name="switch_ext" id="switch_ext" value=""/><br>
+名称:<input type="text" name="node_label" id="node_label" value="" onkeyup="node_label_change(this)"/><br>
+<input type="submit" />
+</form>
+</div>
+
+<input type="button" value="批量提交" onclick="node_label_change(this)"/>

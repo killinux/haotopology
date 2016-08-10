@@ -30,7 +30,7 @@
     for (i = 0, len = keys.length; i < len; i++) {
       var node = graph.getNode(keys[i]);
       var newNode = cloneObject(node);
-      newNode.id = makeNewId(node.component);
+      newNode.id = makeNewId(node.component);//hao review
       clipboardContent.nodes.push(newNode);
       map[node.id] = newNode.id;
     }

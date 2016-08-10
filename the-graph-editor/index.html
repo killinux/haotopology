@@ -78,9 +78,7 @@
       <button id="focus">focus</button>
       <button id="refresh">refresh</button>
       <button id="show_graph">show_graph</button>
-
       <button id="create_node">createNode</button>
-      
     </div>
     <div id="loading" style="position:absolute; top:10px; left:10px; background-color:white; padding:10px; border-radius:5px;">
       <img src="loading.gif"/>
@@ -95,9 +93,7 @@
         window.loadGraph = function (json) {
           var loading = document.getElementById("loading");
           loading.parentNode.removeChild(loading);
-
           var editor = document.getElementById('editor');
-
           /*
             add by ajc
             添加自定义事件listener
@@ -105,22 +101,57 @@
           editor.addEventListener('nodes-select', function(e){
             console.log('选中的node >>>', e.detail)
           })
-
           editor.addEventListener('the-graph-edge-start', function(e){
             console.log('edges >>>', e.type, e.detail)
           })
-
-
+          /*	var library = {
+			  vm: {
+			    name: 'vm',
+			    description: 'virtual mechine',
+			    icon: 'vm',
+			    outports: [
+			      {'name': 'out', 'type': 'all'}
+			    ]
+			  },
+			  vswitch: {
+			    name: 'switch',
+			    description: 'ths switch',
+			    icon: 'switch',
+			    inports: [
+			      {'name': 'in', 'type': 'all'}
+			    ],
+			    outports: [
+			      {'name': 'out', 'type': 'all'}
+			    ]
+			  }
+			};
+		  editor.$.graph.library = library;
+          var addnode = function () {
+	          var id = Math.round(Math.random()*100000).toString(36);
+	          var component = Math.random() > 0.5 ? 'vm' : 'vswitch';
+	          var metadata = {
+	            label: component,
+	            x: Math.round(Math.random()*800),
+	            y: Math.round(Math.random()*600)
+	          };
+	          var newNode = editor.nofloGraph.addNode(id, component, metadata);
+	          return newNode;
+	        };
+	        document.getElementById("create_node").addEventListener("click", addnode);
+	        */
+          
           var graph = json.data ? JSON.parse(json.data.files['noflo.json'].content) : json;
           var graphString = JSON.stringify(graph);
           editor.graph = graph;
+          
+          // Component library
+		
+
+          
           // Attach editor to nav
-           var nav = document.getElementById('nav');
-           nav.editor = editor;
+          var nav = document.getElementById('nav');
+          nav.editor = editor;
           var errorNodeId = null;
-          function listNodes(){
-          	
-          }
           var makeRandomError = function () {// modified  by haoning 告警
             if (!editor.nofloGraph) { return; }
             if (errorNodeId) {
@@ -136,11 +167,9 @@
             });
            
           };
-          //window.setInterval(makeRandomError, 3551);
-          //makeRandomError();
-          
+          window.setInterval(makeRandomError, 3551);
+          makeRandomError();
           // Autolayout button ####################################
-          
           /*document.getElementById("autolayout").addEventListener("click", function () {
             editor.triggerAutolayout();
           });*/
@@ -165,21 +194,21 @@
             editor.graph = JSON.parse(graphString);
            // editor.triggerAutolayout();
           });
-          document.getElementById('create_node').addEventListener('click', function(){
+         /* document.getElementById('create_node').addEventListener('click', function(){
             var id = Math.random().toString(36).substr(2)
             editor.nofloGraph.nodes.push({
               id: id,
-              component: 'switch_shared',
+              component: 'vm',
               metadata: {
-                type:"switch",
-                router_external:"true",
+                vm_id: id,
+                vm_status: 'SHUTOFF',
                 label: id,
                 x: 300,
                 y: 100
               }
             })
             editor.rerender()
-          })
+          })*/
 		  //add by hao
 		  
 		  
@@ -191,9 +220,6 @@
           // Log some stuff
           window.editor = editor;
           console.log(editor);
-          /*window.setTimeout(function () {//todo 1秒后自动layout，这里做的不好换种方式
-          	editor.triggerAutolayout();
-          },1000);*/
         };
         
         window.loadAwGraph=function (json) {//add by hao
@@ -203,7 +229,7 @@
 			
 		}
 		/*###########数据获取第一种方法################### begin*/
-        
+       /* 
         var body = document.querySelector('body');
         var script = document.createElement('script');
         script.type = 'application/javascript';
@@ -221,27 +247,27 @@
         // script.src = 'https://api.github.com/gists/7022262?callback=loadGraph';
         // Edge algo test
         //script.src = 'https://api.github.com/gists/6890344?callback=loadGraph';
-        body.appendChild(script);
+        body.appendChild(script);*/
     	/*########################################## end*/
 
 
 /*###########数据获取第二种方法############################### begin*/
-		/*	$.ajax({  
+			$.ajax({  
 			type: 'GET',  
 			//url: "abc.js?callback=loadGraph",  
 		//	url: "http://192.168.137.37:8081/awstack-resource/v1/topo?callback=loadGraph", 
-			url: "http://192.168.137.37:8081/awstack-resource/v1/topo", 
-		//		url: "ding.json", 
+		//	url: "http://192.168.137.37:8081/awstack-resource/v1/topo", 
+				url: "ding.json", 
 			beforeSend: function(request) {
                         request.setRequestHeader("X-Auth-Token", "fe9b1b3575274c3185dab9779267c3c7");
             },
-			success: function(data){  
+		/*	success: function(data){  
 				//console.log(JSON.parse(data).data);
 				var loadjson=JSON.parse(data).data.data;
 				console.log(JSON.stringify(loadjson));
 				loadGraph(loadjson);
-			},  
-		success: function(loadjson){  
+			},  */
+	    	success: function(loadjson){  
 				//console.log(JSON.parse(data).data);
 			//	var loadjson=JSON.parse(data).data.data;
 			//	console.log(loadjson);
@@ -251,7 +277,7 @@
 				alert("error:"+e);  
 			},  
 			dataType: "string"  
-		});  */
+		});  
 /*###########数据获取第二种方法############################### end*/		
 		
 		
