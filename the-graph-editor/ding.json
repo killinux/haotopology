@@ -23,7 +23,7 @@
 
 "processes":{
         "dom/vm1":{
-            "component":"vm1",
+            "component":"vm/2cde2568-f891-4f5b-8582-9b42744e3da0",
             "metadata":{
             	"type":"vm",
                 "vm_id":"2cde2568-f891-4f5b-8582-9b42744e3da0",
@@ -35,7 +35,7 @@
             }
         },
         "dom/switch1":{
-            "component":"switch1",
+            "component":"dom/switch1",
             "metadata":{
             	"type":"switch",
                 "x":360,
@@ -45,7 +45,6 @@
             }
         },
         "router1":{
-            "component":"router_ea0107c7-b3d8-489b-a587-2901266317ce",
             "component":"router1",
             "metadata":{
             	"type":"router",
@@ -56,7 +55,7 @@
             }
         },
         "switch_ext1":{
-            "component":"switch",
+            "component":"switch_ext1",
             "metadata":{
             	"hidden":"true",
             	"type":"switch",
@@ -73,7 +72,7 @@
     	{
             "tgt":{
                 "process":"dom/switch1",
-                "port":"in1"
+                "port":"in"
             },
             "src":{
                 "process":"dom/vm1",
