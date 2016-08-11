@@ -158,14 +158,12 @@
         document.getElementById("create_edge").addEventListener("click",create_edge);
         //创建vm的时候，网络的选择
 		var vm_net_select=function(vm_id){
-        //	var vm_nets=window.parent.toporight.document.getElementById("vm_net").childNodes;
         	var vm_nets=window.parent.toporight.document.getElementById("vm_net").innerHTML="";
         	var initOption = window.parent.toporight.document.createElement("option");
     		initOption.value=0;
     		initOption.innerHTML="--请选择网络--";
     		window.parent.toporight.document.getElementById("vm_net").appendChild(initOption);
         	var nodes = editor.nofloGraph.nodes;
-        	console.log(editor.nofloGraph.edges);
         	nodes.forEach(function (node) {//add by hao
             	if(node.metadata.type=="switch"){
 					var newOption = window.parent.toporight.document.createElement("option");
@@ -175,13 +173,8 @@
 	        	}
             });
             window.parent.toporight.document.getElementById("vm_net_list").innerHTML="";
-            //window.parent.toporight.vm_edges=editor.nofloGraph.edges;
             editor.nofloGraph.edges.forEach(function(edge){
-            	//window.parent.toporight.vm_edges.push(edge);//保存所有的线到右边页面
             	if(edge.from.node==vm_id){
-            		console.log("ccc");
-            	//	console.log(window.parent.toporight.vm_edges);//.push(edge);
-            		console.log(edge);
             		window.parent.toporight.document.getElementById("vm_net").value=edge.to.node;
             		window.parent.toporight.document.getElementById("vm_net_list").innerHTML+=JSON.stringify(edge)+"</br>"
             	}
