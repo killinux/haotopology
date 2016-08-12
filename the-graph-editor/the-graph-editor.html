@@ -109,7 +109,7 @@
             actions: nodeActions,
             s4: {
               icon: "trash-o",
-              iconLabel: "hidden",
+              iconLabel: "éšè—",
               action: nodeActions.delete
             },
             w4: {
@@ -307,14 +307,14 @@
         var switch_x_init=100;
         var router_x_init=100;
         var ext_switch_x_init=100;
-        nofloGraph.nodes.forEach(function (node) {//haoning:Éú³ÉcomponentµÄµØ·½
+        nofloGraph.nodes.forEach(function (node) {//haoning:ç”Ÿæˆcomponentçš„åœ°æ–¹
         /*add by hao :make node order */
         	if(node.metadata.type=="vm"){
             	    node.metadata.y=100;
             	    node.metadata.x=vm_x_init;
             	    vm_x_init=vm_x_init+100;
         	}
-        	if(node.metadata.type=="switch"&&!node.metadata.router_external){//·ÇÍâ²¿ÍøÂçµÄ£¬Íâ²¿ÍøÂç·Åµ½ÏÂÃæ
+        	if(node.metadata.type=="switch"&&!node.metadata.router_external){//éžå¤–éƒ¨ç½‘ç»œçš„ï¼Œå¤–éƒ¨ç½‘ç»œæ”¾åˆ°ä¸‹é¢
         	    node.metadata.y=300;
         	    node.metadata.x=switch_x_init;
         	    switch_x_init=switch_x_init+100;
@@ -332,23 +332,27 @@
         	    ext_switch_x_init=ext_switch_x_init+100;
         	}
             var make_icon=function(onenode){
-            if(!onenode.metadata.type){
-            	return "switch";
-            }
-          	if(onenode.metadata.type=="switch"){
-          	    //console.log("onenode.metadata:"+onenode.metadata);
-          		if(onenode.metadata.router_external=="true"&&onenode.metadata.shared=="true"){
-          			return "switch_ext_shared";
-          		}else if(onenode.metadata.router_external=="true"){
-          			return "switch_ext";
-          		}else if(onenode.metadata.shared=="true"){
-          			return "switch_shared";
-          		}else{
-          			return "switch";
-          		}
-          	}else{
-          		return onenode.metadata.type
-          	}
+	            if(!onenode.metadata.type){
+	            	console.log("nononoono-------------------");
+	            	return "switch";
+	            }
+	          	if(onenode.metadata.type=="switch"){
+	          	    console.log("onenode.metadata switch##############:");
+	          	    console.log(onenode);
+	          		if(onenode.metadata.router_external=="true"&&onenode.metadata.shared=="true"){
+	          			return "switch_ext_shared";
+	          		}else if(onenode.metadata.router_external=="true"){
+	          			console.log("switch_ext-->");
+	          			return "switch_ext";
+	          		}else if(onenode.metadata.shared=="true"){
+	          			return "switch_shared";
+	          		}else{
+	          			console.log();
+	          			return "switch";
+	          		}
+	          	}else{
+	          		return onenode.metadata.type
+	          	}
           };
           var component = {
             name: node.component,
@@ -361,7 +365,8 @@
             inports: [],
             outports: []
           };
-
+          console.log("component---->");
+		  console.log(component);
           Object.keys(nofloGraph.inports).forEach(function (pub) {
             var exported = nofloGraph.inports[pub];
             if (exported.process === node.id) {
@@ -455,7 +460,7 @@
       },
       animateEdge: function (edge) {
         // Make sure unique
-        console.log("animateEdge----¡·¡·¡·¡·¡·¡·¡·¡·¡·¡·");
+        console.log("animateEdge----ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹ã€‹");
         var index = this.animatedEdges.indexOf(edge);
         if (index === -1) {
           this.animatedEdges.push(edge);

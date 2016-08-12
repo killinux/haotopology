@@ -3,7 +3,7 @@
   <head>
     <title>Graph Editor Demo</title>
     <meta charset="utf-8">
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Bower Libraries -->
     <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
     <script src="../bower_components/react/react-with-addons.js"></script>
@@ -74,7 +74,7 @@
       width="800" height="600"
       grid="72"
       snap="36"
-      theme="dark">
+      theme="light">
     </the-graph-editor>
 
     <!--the-graph-nav id="nav" width="216" height="162"></the-graph-nav-->
@@ -157,7 +157,28 @@
         	var newEdge = editor.nofloGraph.addEdge("dom/vm1", "out123", "switch_ext1", "in123", meta);
         };
         document.getElementById("create_edge").addEventListener("click",create_edge);
-        //创建vm的时候，网络的选择
+        //修改图标
+       	editor.update_icon=function(node_id,new_node){
+       		console.log("update_icon---___>");
+        	var make_icon=function(onenode){//更新图标
+            	if(onenode.metadata.type=="switch"){
+		      		if(onenode.metadata.router_external=="true"&&onenode.metadata.shared=="true"){
+		      			return "switch_ext_shared";
+		      		}else if(onenode.metadata.router_external=="true"){
+		      			return "switch_ext";
+		      		}else if(onenode.metadata.shared=="true"){
+		      			return "switch_shared";
+		      		}else{
+		      			return "switch";
+		      		}
+	          	}else{
+	          		return onenode.metadata.type
+	          	}
+            }
+            var this_icon=make_icon(new_node);
+            editor.updateIcon(node_id, this_icon);//修改图标
+        }
+        //创建和选择vm的时候，网络的选择
 		var vm_net_select=function(vm_id){
         	var vm_nets=window.parent.toporight.document.getElementById("vm_net").innerHTML="";
         	var initOption = window.parent.toporight.document.createElement("option");
@@ -233,8 +254,7 @@
 		})
 		editor.$.graph.library = library;
 		
-		
-       
+	
 		
 		var x_distance=300;
 		var y_distance=50;
@@ -258,26 +278,8 @@
         };
         document.getElementById("create_vm").addEventListener("click", create_vm);
         //新增switch
-        editor.update_icon=function(node_id,new_node){
-        	var make_icon=function(onenode){//更新图标
-            	if(onenode.metadata.type=="switch"){
-		      		if(onenode.metadata.router_external=="true"&&onenode.metadata.shared=="true"){
-		      			return "switch_ext_shared";
-		      		}else if(onenode.metadata.router_external=="true"){
-		      			return "switch_ext";
-		      		}else if(onenode.metadata.shared=="true"){
-		      			return "switch_shared";
-		      		}else{
-		      			return "switch";
-		      		}
-	          	}else{
-	          		return onenode.metadata.type
-	          	}
-            }
-            var this_icon=make_icon(new_node);
-            editor.updateIcon(node_id, this_icon);//修改图标
-        }
-        var create_switch = function () {
+        
+        var create_switch = function () {//component注册后，再出现图标都一样，可能引起页面卡死..
 			x_distance=x_distance+distance;
 			y_distance=y_distance+distance;
 			var id = Math.random().toString(36).substr(2)
