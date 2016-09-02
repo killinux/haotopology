@@ -72,7 +72,7 @@
       theme="dark">
     </the-graph-editor>
     <the-graph-nav id="nav" width="216" height="162"></the-graph-nav>
-    <div id="testing">
+    <div id="testing" style="display:none">
       <!--button id="autolayout">autolayout</button-->
       <button id="theme">theme</button>
       <button id="focus">focus</button>
@@ -212,19 +212,10 @@
 		  document.getElementById("show_graph").addEventListener("click", function () {
             console.log(editor.graph);
           });
-		  
-		  
           // Log some stuff
           window.editor = editor;
           console.log(editor);
         };
-        
-        window.loadAwGraph=function (json) {//add by hao
-		console.log("------------->>>>");
-		console.log("loadAwGraph:"+JSON.stringify(graph));
-        window.loadGraph(json.data.data);
-			
-		}
 		/*###########数据获取第一种方法################### begin*/
        /* 
         var body = document.querySelector('body');
@@ -249,25 +240,20 @@
 
 
 /*###########数据获取第二种方法############################### begin*/
-			$.ajax({  
+		$.ajax({  
 			type: 'GET',  
-			//url: "abc.js?callback=loadGraph",  
 		//	url: "http://192.168.137.37:8081/awstack-resource/v1/topo?callback=loadGraph", 
 		//	url: "http://192.168.137.37:8081/awstack-resource/v1/topo", 
-				url: "ding.json", 
+			url: "ding.json", 
 			beforeSend: function(request) {
-                        request.setRequestHeader("X-Auth-Token", "fe9b1b3575274c3185dab9779267c3c7");
+                  request.setRequestHeader("X-Auth-Token", "fe9b1b3575274c3185dab9779267c3c7");
             },
-		/*	success: function(data){  
-				//console.log(JSON.parse(data).data);
+			/*success: function(data){  
 				var loadjson=JSON.parse(data).data.data;
 				console.log(JSON.stringify(loadjson));
 				loadGraph(loadjson);
-			},  */
+			},*/
 	    	success: function(loadjson){  
-				//console.log(JSON.parse(data).data);
-			//	var loadjson=JSON.parse(data).data.data;
-			//	console.log(loadjson);
 				loadGraph(loadjson);
 			},
 			error:function(e){  

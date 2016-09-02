@@ -71,11 +71,11 @@
           }.bind(this),
           copy: function (graph, itemKey, item) {
             TheGraph.Clipboard.copy(graph, [itemKey]);
-          },
-          info: function (graph, itemKey, item) {//add by hao
+          }
+          /*,info: function (graph, itemKey, item) {//add by hao
           	alert("show the oprate info:"+item.id+" "+item.metadata.label);
             //TheGraph.Clipboard.copy(graph, [itemKey]);
-          }
+          }*/
         }, edgeActions = {
           delete: function (graph, itemKey, item) {
             graph.removeEdge(item.from.node, item.from.port, item.to.node, item.to.port);
@@ -117,16 +117,16 @@
               iconLabel: "copy",
               action:  nodeActions.copy
             }
-            ,e4: {//add by hao
+            /*,e4: {//add by hao
               icon: "info",
               iconLabel: "info",
               action:  nodeActions.info
-            }
+            }*/
           },
           nodeInport: {
             w4: {
               icon: "sign-in",
-              iconLabel: "export1111",
+              iconLabel: "export",
               action: function (graph, itemKey, item) {
               	console.log("nodeInport-->");
                 var pub = item.port;
@@ -310,35 +310,35 @@
         nofloGraph.nodes.forEach(function (node) {//haoning:生成component的地方
         /*add by hao :make node order */
         	if(node.metadata.type=="vm"){
-            	    node.metadata.y=100;
+            	    node.metadata.y=700;
             	    node.metadata.x=vm_x_init;
             	    vm_x_init=vm_x_init+100;
         	}
         	if(node.metadata.type=="switch"&&!node.metadata.router_external){//非外部网络的，外部网络放到下面
-        	    node.metadata.y=300;
+        	    node.metadata.y=500;
         	    node.metadata.x=switch_x_init;
         	    switch_x_init=switch_x_init+100;
         	}
         	if(node.metadata.type=="router"){
-        	    node.metadata.y=500;
+        	    node.metadata.y=300;
         	    node.metadata.x=router_x_init;
         	    router_x_init=router_x_init+100;
         	}
         //	console.log("router_external--->");
         	if(node.metadata.router_external=="true"){
         //	console.log("router_external--->>>>");
-        	    node.metadata.y=700;
+        	    node.metadata.y=100;
         	    node.metadata.x=ext_switch_x_init;
         	    ext_switch_x_init=ext_switch_x_init+100;
         	}
             var make_icon=function(onenode){
 	            if(!onenode.metadata.type){
-	            	console.log("nononoono-------------------");
+	            	//console.log("nononoono-------------------");
 	            	return "switch";
 	            }
 	          	if(onenode.metadata.type=="switch"){
-	          	    console.log("onenode.metadata switch##############:");
-	          	    console.log(onenode);
+	          	    //console.log("onenode.metadata switch##############:");
+	          	    //console.log(onenode);
 	          		if(onenode.metadata.router_external=="true"&&onenode.metadata.shared=="true"){
 	          			return "switch_ext_shared";
 	          		}else if(onenode.metadata.router_external=="true"){
@@ -365,8 +365,8 @@
             inports: [],
             outports: []
           };
-          console.log("component---->");
-		  console.log(component);
+          //console.log("component---->");
+		  //console.log(component);
           Object.keys(nofloGraph.inports).forEach(function (pub) {
             var exported = nofloGraph.inports[pub];
             if (exported.process === node.id) {

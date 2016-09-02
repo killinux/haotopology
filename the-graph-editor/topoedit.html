@@ -83,7 +83,7 @@
       	<button id="create_vm">新增虚拟机</button>
 	    <button id="create_switch">新增交换机</button>
 	    <button id="create_router">新增路由器</button>
-		<div style="display:none">
+		<div style="display:block">
 			<button id="autolayout">autolayout</button>
 			<button id="addnode">addnode</button>
 			<button id="addedge">add edge</button>
@@ -133,7 +133,8 @@
 				description: 'this is a switch',
 				icon: 'switch',
 				inports: [
-				  {'name': 'in', 'type': 'all'}
+				  {'name': 'in', 'type': 'all'},
+				  {'name': 'in1', 'type': 'all'}
 				],
 				outports: [
 				  {'name': 'out', 'type': 'all'}
